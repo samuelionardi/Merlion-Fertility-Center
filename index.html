@@ -117,6 +117,14 @@
   /* wave divider */
   .wave-divider{display:block;width:100%;height:70px;margin-top:-2px;}
 
+  /* ---------- HIGHLIGHTS ---------- */
+  .highlights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
+  .highlight{border-top:2px solid var(--peach);padding-top:22px;}
+  .highlight h3{font-size:1.2rem;margin-bottom:10px;}
+  .highlight p{color:var(--ink-soft);margin:0;}
+  .highlight:nth-child(2){border-top-color:var(--teal);}
+  .highlight:nth-child(3){border-top-color:var(--navy);}
+
   /* ---------- ABOUT ---------- */
   .about{background:var(--navy-deep);color:#eef3f5;padding:90px 0;}
   .about h2{color:#fff;}
@@ -128,6 +136,10 @@
   }
   .about .quote cite{
     display:block;font-style:normal;font-size:0.9rem;color:var(--peach-soft);margin-top:16px;font-family:var(--sans);
+  }
+  .about-image{
+    width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;margin-bottom:32px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
   }
 
   /* ---------- SECTION HEADS ---------- */
@@ -160,6 +172,7 @@
     border-radius:50%;overflow:hidden;aspect-ratio:1/1;background:#fff;
     box-shadow:0 12px 30px rgba(10,32,56,0.12);
   }
+  .doctor-portrait img{width:100%;height:100%;object-fit:cover;display:block;}
   .doctor-body .role{color:var(--teal);font-family:var(--serif);font-style:italic;margin-bottom:8px;display:block;}
   .doctor-body h3{font-size:1.5rem;margin-bottom:4px;}
   .doctor-body p{color:var(--ink-soft);max-width:56ch;}
@@ -207,6 +220,7 @@
 
   @media (max-width:880px){
     .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;}
+    .highlights-grid{grid-template-columns:1fr;gap:28px;}
     .hero-art{max-width:340px;margin:0 auto;}
     nav{position:fixed;top:0;right:0;bottom:0;background:var(--cream);width:76%;max-width:320px;
         transform:translateX(100%);transition:transform 0.3s ease;padding:100px 32px 32px;box-shadow:-6px 0 24px rgba(0,0,0,0.1);}
@@ -261,7 +275,6 @@
         <div class="hero-stats">
           <div><strong>Pre-launch</strong><span>Now building our Goodman Road centre</span></div>
           <div><strong>6</strong><span>Referral partner institutions across Singapore</span></div>
-          <div><strong>5.2 FTE</strong><span>Embryology team at launch</span></div>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -291,6 +304,30 @@
     </svg>
   </section>
 
+  <!-- HIGHLIGHTS -->
+  <section id="highlights">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Why Merlion Fertility Centre</p>
+        <h2>Built around what matters most, from day one</h2>
+      </div>
+      <div class="highlights-grid">
+        <div class="highlight">
+          <h3>6 Core Services</h3>
+          <p>From IVF and ICSI to fertility preservation, andrology, recurrent miscarriage care and genetic testing — comprehensive reproductive medicine under one roof.</p>
+        </div>
+        <div class="highlight">
+          <h3>Fast-Track Oncofertility</h3>
+          <p>Patients newly diagnosed with cancer receive fertility counselling and preservation before treatment begins, coordinated directly with their oncology team.</p>
+        </div>
+        <div class="highlight">
+          <h3>Preserve a Future Fund</h3>
+          <p>Subsidised fertility preservation for eligible cancer patients facing financial barriers, supported by the Singapore Cancer Society and community partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container about-grid">
@@ -300,9 +337,12 @@
         <p>Merlion Fertility Centre offers comprehensive reproductive medicine alongside a dedicated referral pathway for cancer patients who need fertility preservation. Our rapid-access oncology program means patients newly diagnosed with cancer can receive fertility counselling and preservation before starting treatment, with no time lost.</p>
         <p>We maintain close referral and collaborative relationships with Singapore's major oncology and tertiary institutions, and every patient — whether beginning IVF or racing against a treatment start date — is supported by a care coordinator from their very first appointment.</p>
       </div>
-      <div class="quote">
-        “What stayed with us wasn't just the treatment plan — it was that someone remembered our names, our history, and what we'd already been through.”
-        <cite>— Patient, Oncofertility Programme</cite>
+      <div>
+        <img class="about-image" src="assets/Waitingroom.jpg" alt="Merlion Fertility Centre">
+        <div class="quote">
+          “What stayed with us wasn't just the treatment plan — it was that someone remembered our names, our history, and what we'd already been through.”
+          <cite>— Patient, Oncofertility Programme</cite>
+        </div>
       </div>
     </div>
   </section>
@@ -368,12 +408,7 @@
 
       <div class="doctor">
         <div class="doctor-portrait">
-          <svg viewBox="0 0 280 280" width="100%" height="100%">
-            <rect width="280" height="280" fill="#eef3f4"/>
-            <circle cx="140" cy="110" r="52" fill="#123a5c"/>
-            <path d="M60 260c10-58 46-92 80-92s70 34 80 92z" fill="#3f7f93"/>
-            <circle cx="140" cy="105" r="4" fill="#f1cbae"/>
-          </svg>
+          <img src="assets/team/Niu.jpg" alt="Dr. Niu Niu">
         </div>
         <div class="doctor-body">
           <span class="role">Reproductive Medicine</span>
@@ -384,12 +419,7 @@
 
       <div class="doctor reverse">
         <div class="doctor-portrait">
-          <svg viewBox="0 0 280 280" width="100%" height="100%">
-            <rect width="280" height="280" fill="#eef3f4"/>
-            <circle cx="140" cy="110" r="52" fill="#dd9c78"/>
-            <path d="M60 260c10-58 46-92 80-92s70 34 80 92z" fill="#123a5c"/>
-            <circle cx="140" cy="105" r="4" fill="#fff"/>
-          </svg>
+          <img src="assets/team/Aggie.jpg" alt="Dr. Aggie Xu">
         </div>
         <div class="doctor-body">
           <span class="role">Reproductive Medicine</span>
@@ -400,12 +430,7 @@
 
       <div class="doctor">
         <div class="doctor-portrait">
-          <svg viewBox="0 0 280 280" width="100%" height="100%">
-            <rect width="280" height="280" fill="#eef3f4"/>
-            <circle cx="140" cy="110" r="52" fill="#3f7f93"/>
-            <path d="M60 260c10-58 46-92 80-92s70 34 80 92z" fill="#dd9c78"/>
-            <circle cx="140" cy="105" r="4" fill="#123a5c"/>
-          </svg>
+          <img src="assets/team/Jeff.jpg" alt="Jeffrey, Scientific Director">
         </div>
         <div class="doctor-body">
           <span class="role">Scientific Director · Embryology</span>
@@ -416,12 +441,7 @@
 
       <div class="doctor reverse">
         <div class="doctor-portrait">
-          <svg viewBox="0 0 280 280" width="100%" height="100%">
-            <rect width="280" height="280" fill="#eef3f4"/>
-            <circle cx="140" cy="110" r="52" fill="#123a5c"/>
-            <path d="M60 260c10-58 46-92 80-92s70 34 80 92z" fill="#f1cbae"/>
-            <circle cx="140" cy="105" r="4" fill="#3f7f93"/>
-          </svg>
+          <img src="assets/team/Samuel.jpg" alt="Samuel Lionardi, Embryologist">
         </div>
         <div class="doctor-body">
           <span class="role">Embryologist</span>
