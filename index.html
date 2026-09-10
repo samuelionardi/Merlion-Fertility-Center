@@ -218,6 +218,18 @@
 
   a:focus-visible, button:focus-visible{outline:2px solid var(--peach);outline-offset:2px;}
 
+  /* ---------- MUSIC TOGGLE ---------- */
+  #musicToggle{
+    position:fixed;bottom:22px;right:22px;z-index:200;
+    width:46px;height:46px;border-radius:50%;
+    background:var(--navy-deep);color:#fff;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(10,32,56,0.3);
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  #musicToggle:hover{background:var(--teal);transform:scale(1.05);}
+  #musicToggle svg{width:20px;height:20px;}
+
   @media (max-width:880px){
     .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;}
     .highlights-grid{grid-template-columns:1fr;gap:28px;}
@@ -238,6 +250,17 @@
 </style>
 </head>
 <body>
+
+<audio id="bgMusic" src="assets/song.mp3" loop preload="auto"></audio>
+<button id="musicToggle" aria-label="Toggle background music" aria-pressed="false">
+  <svg id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+  </svg>
+  <svg id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    <line x1="2" y1="2" x2="22" y2="22"/>
+  </svg>
+</button>
 
 <header id="siteHeader">
   <div class="container nav-row">
@@ -592,6 +615,45 @@
     e.preventDefault();
     formMsg.style.display = 'block';
     form.reset();
+  });
+
+  // background music
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const iconOn = document.getElementById('musicIconOn');
+  const iconOff = document.getElementById('musicIconOff');
+  bgMusic.volume = 0.25;
+
+  function setIcon(playing){
+    iconOn.style.display = playing ? 'block' : 'none';
+    iconOff.style.display = playing ? 'none' : 'block';
+    musicToggle.setAttribute('aria-pressed', playing);
+  }
+
+  // Try to start muted so autoplay is allowed by the browser
+  bgMusic.muted = true;
+  bgMusic.play().catch(() => { /* autoplay blocked entirely; wait for a click */ });
+
+  let unmuted = false;
+  function tryUnmuteOnFirstInteraction(){
+    if (unmuted) return;
+    unmuted = true;
+    bgMusic.muted = false;
+    bgMusic.play().then(() => setIcon(true)).catch(() => setIcon(false));
+    document.removeEventListener('click', tryUnmuteOnFirstInteraction);
+  }
+  document.addEventListener('click', tryUnmuteOnFirstInteraction);
+
+  musicToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    unmuted = true;
+    if (bgMusic.paused || bgMusic.muted){
+      bgMusic.muted = false;
+      bgMusic.play().then(() => setIcon(true)).catch(() => setIcon(false));
+    } else {
+      bgMusic.pause();
+      setIcon(false);
+    }
   });
 </script>
 
