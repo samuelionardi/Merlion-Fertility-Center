@@ -640,9 +640,13 @@
     unmuted = true;
     bgMusic.muted = false;
     bgMusic.play().then(() => setIcon(true)).catch(() => setIcon(false));
-    document.removeEventListener('click', tryUnmuteOnFirstInteraction);
+    ['click','scroll','keydown','touchstart','mousemove'].forEach(evt =>
+      document.removeEventListener(evt, tryUnmuteOnFirstInteraction)
+    );
   }
-  document.addEventListener('click', tryUnmuteOnFirstInteraction);
+  ['click','scroll','keydown','touchstart','mousemove'].forEach(evt =>
+    document.addEventListener(evt, tryUnmuteOnFirstInteraction, { once:true })
+  );
 
   musicToggle.addEventListener('click', (e) => {
     e.stopPropagation();
